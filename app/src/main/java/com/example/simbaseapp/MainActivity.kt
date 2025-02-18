@@ -12,6 +12,8 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: PlanAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,18 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        adapter = PlanAdapter(emptyList()) { selectedPlan ->
+            Toast.makeText(
+                this@MainActivity,
+                "Selected Plan: ${selectedPlan.name}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        recyclerView.adapter = adapter
+
+
+
 
         fetchDataPlans()
     }
